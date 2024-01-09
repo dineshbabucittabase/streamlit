@@ -35,12 +35,11 @@ if acc_name != '' and user != '' and pwd != '' and role != '' and wh != '':
     with open('C:/Users/DineshBabu/.streamlit/secrets.toml','a') as file:
         file.truncate(0)
         file.write(secret)
-    
-# Initialize connection.
-conn = st.connection("snowflake")
 
 test_con = st.button("Test Connection")
 if test_con:
+    # Initialize connection.
+    conn = st.connection("snowflake")    
     conn._instance.close()      
     with open('C:/Users/DineshBabu/.streamlit/secrets.toml','a') as file:
         file.truncate(0)
@@ -57,11 +56,10 @@ email = st.text_input('To')
 email_Subject = st.text_input('Subject')
 email_body = st.text_area('Message')
 
-conn = st.connection("snowflake")
-
-conn.__init__("snowflake")
 
 if st.button('Send Email'):
+    conn = st.connection("snowflake")
+    conn.__init__("snowflake")
     cur = conn.cursor()
 # Execute a statement that will generate a result set.
     sql = "CREATE NOTIFICATION INTEGRATION IF NOT EXISTS  my_email_int TYPE = EMAIL ENABLED = TRUE;"
