@@ -19,31 +19,31 @@ with role_name:
 with warehouse:
     wh = st.text_input("Default Warehouse")
 
-if acc_name != '' and user != '' and pwd != '' and role != '' and wh != '':
+# if acc_name != '' and user != '' and pwd != '' and role != '' and wh != '':
     
-    secret = f'''
-    # .streamlit/secrets.toml
-    [connections.snowflake]
-    user = "{user}"
-    password = "{pwd}"
-    account = "{acc_name}"
-    role = "{role}"
-    warehouse = "{wh}" 
-    client_session_keep_alive = "false"'''
+#     secret = f'''
+#     # .streamlit/secrets.toml
+#     [connections.snowflake]
+#     user = "{user}"
+#     password = "{pwd}"
+#     account = "{acc_name}"
+#     role = "{role}"
+#     warehouse = "{wh}" 
+#     client_session_keep_alive = "false"'''
 
 
-    with open('C:/Users/DineshBabu/.streamlit/secrets.toml','a') as file:
-        file.truncate(0)
-        file.write(secret)
+#     with open('C:/Users/DineshBabu/.streamlit/secrets.toml','a') as file:
+#         file.truncate(0)
+#         file.write(secret)
 
 test_con = st.button("Test Connection")
 if test_con:
     # Initialize connection.
     conn = st.connection("snowflake")    
     conn._instance.close()      
-    with open('.streamlit/secrets.toml','a') as file:
-        file.truncate(0)
-        file.write(secret)
+    # with open('.streamlit/secrets.toml','a') as file:
+    #     file.truncate(0)
+    #     file.write(secret)
     test_connection = conn.query("select 123 from dual;")    
     if test_connection.to_string(index=False, header=False) == '123':
         st.success('Valid Connection!', icon="✅")
