@@ -68,7 +68,5 @@ if st.button('Send Email'):
     
     if df.to_string(index=False, header=False) == 'True':
         st.success('Email Sent Successfully!', icon="✅")
-        # with open('C:/Users/DineshBabu/.streamlit/secrets.toml','a') as file:
-        #     file.truncate(0)
     else:
         st.error('This is an error', icon="🚨")
