@@ -41,7 +41,7 @@ if test_con:
     # Initialize connection.
     conn = st.connection("snowflake")    
     conn._instance.close()      
-    with open('C:/Users/DineshBabu/.streamlit/secrets.toml','a') as file:
+    with open('.streamlit/secrets.toml','a') as file:
         file.truncate(0)
         file.write(secret)
     test_connection = conn.query("select 123 from dual;")    
